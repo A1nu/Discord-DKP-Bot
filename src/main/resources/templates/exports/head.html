@@ -1,0 +1,11 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head (titleText)">
+    <!--/*@thymesVar id="titleText" type="'title is not loaded'"*/-->
+    <title th:text="${titleText}">Dummy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <script th:src="@{/js/bootstrap.bundle.js}"></script>
+</head>
