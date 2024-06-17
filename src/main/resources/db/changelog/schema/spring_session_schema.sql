@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset splitStatements:true endDelimiter:; dbms:postgresql runOnChange:true logicalFilePath:schema/schema.sql
+--changeset splitStatements:true endDelimiter:; dbms:postgresql runOnChange:true logicalFilePath:schema/spring_session_schema.sql
 --preconditions onFail:HALT onError:HALT
 CREATE TABLE SPRING_SESSION (
                                 PRIMARY_ID CHAR(36) NOT NULL,

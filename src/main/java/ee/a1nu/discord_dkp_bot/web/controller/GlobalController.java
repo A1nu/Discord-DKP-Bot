@@ -2,6 +2,7 @@ package ee.a1nu.discord_dkp_bot.web.controller;
 
 import ee.a1nu.discord_dkp_bot.web.dto.UserPOJO;
 import ee.a1nu.discord_dkp_bot.web.rest.DiscordRestService;
+import ee.a1nu.discord_dkp_bot.web.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,15 +15,20 @@ public class GlobalController {
 
 
     private final DiscordRestService discordRestService;
+    private final SessionService sessionService;
 
     @Autowired
-    public GlobalController(DiscordRestService discordRestService) {
+    public GlobalController(DiscordRestService discordRestService, SessionService sessionService) {
         this.discordRestService = discordRestService;
+        this.sessionService = sessionService;
     }
 
-    @ModelAttribute("test")
+    @ModelAttribute("avatarUrl")
     public String getTest() {
-        UserPOJO userPOJO = discordRestService.getAuthenticatedUserData();
-        return discordCdnUrl + "avatars/" + userPOJO.getId() + "/" + userPOJO.getAvatar() + ".png";
+        if (sessionService.isUserAuthenticated()) {
+            UserPOJO userPOJO = discordRestService.getAuthenticatedUserData();
+            return discordCdnUrl + "avatars/" + userPOJO.getId() + "/" + userPOJO.getAvatar() + ".png";
+        }
+        return null;
     }
 }

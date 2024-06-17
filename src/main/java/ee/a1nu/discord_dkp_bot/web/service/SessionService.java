@@ -4,7 +4,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,16 +14,16 @@ public class SessionService {
         this.authorizedClientService = authorizedClientService;
     }
 
-    public String getSessionBearerToken() {
+    public boolean isUserAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.getPrincipal() != "anonymousUser") {
-            OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
-            OAuth2AuthorizedClient client =
-                    authorizedClientService.loadAuthorizedClient(
-                            oauthToken.getAuthorizedClientRegistrationId(),
-                            oauthToken.getName());
-            return client.getAccessToken().getTokenValue();
-        }
-        return null;
+        return authentication.isAuthenticated() && authentication.getPrincipal() != "anonymousUser";
+    }
+
+    public String getSessionBearerToken() {
+        OAuth2AuthorizedClient authorizedClient =
+                this.authorizedClientService.loadAuthorizedClient(
+                        "discord",
+                        SecurityContextHolder.getContext().getAuthentication().getName());
+        return authorizedClient.getAccessToken().getTokenValue();
     }
 }
