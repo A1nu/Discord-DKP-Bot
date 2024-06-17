@@ -1,10 +1,13 @@
 package ee.a1nu.discord_dkp_bot.web.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class UserPOJO {
+@Builder
+public class UserDetailsDTO {
     Long id;
     String username;
     String avatar;
+    String globalName;
 }

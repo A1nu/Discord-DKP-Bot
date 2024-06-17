@@ -11,9 +11,9 @@ spring:
 #  profiles:
 #    active: ${PROFILE}
   datasource:
-    url: jdbc:postgresql://localhost:5432/discord-bot-dev
-    username: bot
-    password: bottest
+    url: jdbc:postgresql://${POSTGRES_DB_ADDRESS}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
   sql:
     init:
@@ -41,11 +41,11 @@ spring:
           discord:
             redirect-uri: "{baseUrl}/login/oauth2/code/discord"
             authorization-grant-type: authorization_code
-            client-id: 752438109395877969
+            client-id: ${DISCORD_OAUTH_CLIENT_ID}
             client-name: A1nu-dev
-            client-secret: GPXJdA_VsThrpfBqMidF8LsjHGqtmINZ
+            client-secret: ${DISCORD_OAUTH_CLIENT_SECRET}
             client-authentication-method: client_secret_post
-            scope: [ identify, email, guilds ]
+            scope: [ identify, guilds ]
         provider:
           discord:
             authorization-uri: https://discord.com/oauth2/authorize
