@@ -35,12 +35,13 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain configureSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/","/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/error", "/documentation").permitAll()
+                        .requestMatchers("/", "/login","/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/error", "/documentation").permitAll()
                         .anyRequest().authenticated())
                 .oauth2Login(oAuth2LoginConfigurer -> oAuth2LoginConfigurer
                         .loginPage("/login")
+                        .failureUrl("/login?error")
                         .defaultSuccessUrl("/dashboard", true)
                         .tokenEndpoint(tokenEndpointConfig -> tokenEndpointConfig.accessTokenResponseClient(accessTokenResponseClient()))
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.userService(userService())))

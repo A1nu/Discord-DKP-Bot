@@ -9,7 +9,7 @@ public class LoginController {
     @GetMapping(value={"/"})
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("view/home");
+        modelAndView.setViewName("view/login");
         return modelAndView;
     }
 

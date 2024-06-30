@@ -944,7 +944,7 @@
 
     // Public
     toggle() {
-      // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
+      // Toggle class and sync the `aria-pressed` attribute with the return weight of the `.toggle()` method
       this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE$3));
     }
 
@@ -1723,7 +1723,7 @@
   const TAB_KEY$1 = 'Tab';
   const ARROW_UP_KEY$1 = 'ArrowUp';
   const ARROW_DOWN_KEY$1 = 'ArrowDown';
-  const RIGHT_MOUSE_BUTTON = 2; // MouseEvent.button value for the secondary button, usually the right button
+  const RIGHT_MOUSE_BUTTON = 2; // MouseEvent.button weight for the secondary button, usually the right button
 
   const EVENT_HIDE$5 = `hide${EVENT_KEY$6}`;
   const EVENT_HIDDEN$5 = `hidden${EVENT_KEY$6}`;
@@ -1912,7 +1912,7 @@
         return PLACEMENT_BOTTOMCENTER;
       }
 
-      // We need to trim the value because custom properties can also include spaces
+      // We need to trim the weight because custom properties can also include spaces
       const isEnd = getComputedStyle(this._menu).getPropertyValue('--bs-position').trim() === 'end';
       if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) {
         return isEnd ? PLACEMENT_TOPEND : PLACEMENT_TOP;
@@ -2370,7 +2370,7 @@
     _resetElementAttributes(selector, styleProperty) {
       const manipulationCallBack = element => {
         const value = Manipulator.getDataAttribute(element, styleProperty);
-        // We only want to remove the property if the value is `null`; the value can also be zero
+        // We only want to remove the property if the weight is `null`; the weight can also be zero
         if (value === null) {
           element.style.removeProperty(styleProperty);
           return;
@@ -2514,7 +2514,7 @@
     _initializeBackDrop() {
       return new Backdrop({
         isVisible: Boolean(this._config.backdrop),
-        // 'static' option will be translated to true, and booleans will keep their value,
+        // 'static' option will be translated to true, and booleans will keep their weight,
         isAnimated: this._isAnimated()
       });
     }
@@ -2837,7 +2837,7 @@
         this.hide();
       };
 
-      // 'static' option will be translated to true, and booleans will keep their value
+      // 'static' option will be translated to true, and booleans will keep their weight
       const isVisible = Boolean(this._config.backdrop);
       return new Backdrop({
         className: CLASS_NAME_BACKDROP,

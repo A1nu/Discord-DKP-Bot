@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{exports/head :: head (#{home.title})}"></head>
+    <body>
+        <nav th:replace="~{exports/navbar :: navigation ('dasboard')}"></nav>
+        <div class="container d-flex vw-100 border border-top-0">
+            <div th:replace="~{exports/admin-side-nav}"></div>
+            <div class="container d-flex flex-column p-4">
+                <div class="pt-3">
+                    <h2 th:text="#{admin.settings}">Application settings</h2>
+                </div>
+                <ul class="nav nav-tabs my-4" id="settingsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="roles-tab" data-bs-toggle="tab" data-bs-target="#roles" type="button" role="tab" aria-controls="roles" aria-selected="true" th:text="#{admin.rolesTab}">Home</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false" th:text="#{admin.settingsTab}">Profile</button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="roles" role="tabpanel" aria-labelledby="roles-tab" tabindex="0">Roles</div>
+                    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">Settings</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="exports/head :: head (#{home.title})"></head>
+<head th:replace="~{exports/head :: head (#{home.title})}"></head>
 <body>
-<div>
-    <nav th:replace="exports/navbar :: navigation ('dashboard')"></nav>
-</div>
-<div th:text="${avatarUrl}"></div>
-<nav aria-label="breadcrumb">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/home}" th:text="#{navigation.home}"></a></li>
-            <li class="breadcrumb-item active" aria-current="page" th:text="#{navigation.dashboard}"></li>
-        </ol>
-    </nav>
-</nav>
+    <nav th:replace="~{exports/navbar :: navigation ('dasboard')}"></nav>
+    <div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 min-vw-100 flex-column">
+        <div class="container flex-column align-items-center justify-content-center d-flex mb-5">
+            <h2>Choose your server</h2>
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-stretch flex-wrap">
+            <div class="card m-2" style="width: 18rem;" th:each="guild : ${botGuilds}">
+                <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title" th:text="${guild.getName()}">Card title</h5>
+<!--                    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>-->
+<!--                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    <div class="d-flex h-100 flex-column justify-content-end">
+                        <div class="d-flex flex-row">
+                            <div th:if="${guild.getPermissions() == 2147483647 && !guild.getBotExists()}">
+                                <form action="https://discord.com/oauth2/authorize">
+                                    <input type="hidden" name="client_id" th:value="${client_id}" />
+                                    <input type="hidden" name="guild_id" th:value="${guild.getId()}" />
+                                    <input type="hidden" name="permissions" th:value="${permissions}" />
+                                    <input type="hidden" name="scope" value="bot" />
+                                    <button class="btn btn-primary"  type="submit" th:text="#{dashboard.connect}">Go somewhere</button>
+                                </form>
+                            </div>
+                            <div class="me-2" th:if="${guild.getBotExists()}">
+                                <form th:action="@{/dashboard/guild}">
+                                    <input type="hidden" name="guild_id" th:value="${guild.getId()}" />
+                                    <button class="btn btn-primary"  type="submit" th:text="#{dashboard.openGuild}">Enter</button>
+                                </form>
+                            </div>
+                            <div th:if="${guild.getPermissions() == 2147483647 && guild.getBotExists()}">
+                                <a th:href="@{/guild/{guildId}/settings(guildId=${guild.getId()})}">
+                                    <button class="btn btn-outline-secondary"  type="submit" th:text="#{dashboard.configure}">Config</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,41 @@
+body > * {
+    background-color: white;
+}
+
+.login-button-container {
+    height: 50vh;
+    background: #D9D9D9
+}
+
+.navbar-brand > img {
+    width: 49px;
+    height: 49px;
+}
+
+.min-vh-75 {
+    min-height: 75vh !important;
+}
+
+.avatar-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.dropdown-menu[data-bs-popper] {
+    left: -100%;
+}
+
+.menu-active {
+    background: #E7F1FF;
+}
+
+.disabled, .disabled > * {
+    opacity: 50 !important;
+    cursor: not-allowed;
+}
+
+/*.border {*/
+/*    box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.13) inset;*/
+/*}*/

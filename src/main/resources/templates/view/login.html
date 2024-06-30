@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="exports/head :: head (#{home.title})"></head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{exports/head :: head (#{home.title})}"></head>
 <body>
-<div>
-    <nav th:replace="exports :: navigation ('login')"></nav>
-</div>
-
-Please log in first
+    <nav th:replace="~{exports/navbar :: navigation ('dasboard')}"></nav>
+    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 vw-100">
+        <div class="container login-button-container d-flex justify-content-center align-items-center ">
+            <div>
+                <form method="get" th:action="@{/oauth2/authorization/discord}">
+                    <button class="btn btn-primary fs-2" th:text="#{login.loginButton}"></button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
